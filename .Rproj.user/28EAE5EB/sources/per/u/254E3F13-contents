@@ -1,0 +1,33 @@
+---
+title: "toy_example"
+author: "Jeff"
+date: "6/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r load packages}
+
+library(reticulate)
+
+```
+
+## Experimenting with python and R markdown
+I like Rmarkdown quite a bit for making interpretable code projects with nice formatting, and I was  surprised to learn that it apparently works with python too. So now, because I'm a masochist, I'm going to try out getting python and R to play with eachother and see if this might be a feasible way to develop skills in both. 
+
+```{python torch}
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
