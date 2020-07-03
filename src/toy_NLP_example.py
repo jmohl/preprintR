@@ -14,10 +14,10 @@ import numpy as np
 from torchtext.datasets import text_classification
 NGRAMS = 2
 import os
-if not os.path.isdir('./.data'):
-    os.mkdir('./.data')
+if not os.path.isdir('./data'):
+    os.mkdir('./data')
 train_dataset, test_dataset = text_classification.DATASETS['AG_NEWS'](
-    root='./.data', ngrams=NGRAMS, vocab=None)
+    root='./data', ngrams=NGRAMS, vocab=None)
 BATCH_SIZE = 16
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -143,12 +143,11 @@ ag_news_label = {0 : "World",
 def predict(text, model, vocab, ngrams):
     tokenizer = get_tokenizer("basic_english")
     with torch.no_grad():
-        text = torch.tensor([vocab[token]
-                            for token in ngrams_iterator(tokenizer(text), ngrams)])
+        text = torch.tensor([vocab[token] for token in ngrams_iterator(tokenizer(text), ngrams)])
         output = model(text, torch.tensor([0]))
         return output.softmax(1)
 
-ex_text_str = "MANY HONG KONGERS still do not know exactly what the new national-security law China is imposing on the territory contains. In May China announced it would enact a bill for Hong Kong covering crimes such as subversion and secession, without referring to the city’s legislature. Passed by China’s rubber-stamp parliament in Beijing on June 30th, and promulgated by an order from China’s president, Xi Jinping, its text was made public only late that night, when Hong Kong’s government gazetted the legislation (an outline had been released ten days earlier). But already the law is having profound consequences both for Hong Kong’s internal politics and its international relations."
+ex_text_str = "Unions representing workers at Turner Newall say they are 'disappointed' after talks with stricken parent firm Federal Mogul."
 vocab = train_dataset.get_vocab()
 model = model.to("cpu")
 this_out = predict(ex_text_str, model, vocab, 2)
